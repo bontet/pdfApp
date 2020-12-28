@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,42 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+/* DataTables CSS */
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.scss";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+
+body {
+  background-color: white;
+}
+
+.flowpaper_bttnDownload.flowpaper_tbbutton.download {
+  display: none !important;
+}
+
+.error-message {
+  color: var(--ion-color-danger);
+  margin-left: 20px;
+}
+
+ion-content {
+  --background: rgb(238, 238, 238);
+}
+
+ion-loading.dk-loading {
+  .loading-wrapper {
+    background: transparent;
+    box-shadow: none;
+    color: white;
+    .custom-spinner-box img {
+      max-width: 50px;
+    }
+  }
+}
+
+.ngx-datatable.material.single-selection
+  .datatable-body-row.active
+  .datatable-row-group {
+  background-color: rgb(144, 223, 255) !important;
+}

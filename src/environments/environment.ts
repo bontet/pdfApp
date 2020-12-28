@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  base_url: 'https://services.ptkcg.co.id/v1/',
+  file_url: 'https://clouds.ptkcg.co.id/pedro/',
+  default_image: 'assets/images/default-image-rev.jpg'
 };
 
 /*

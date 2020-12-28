@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+  <iframe (load)="isLoading =false" frameborder="0" width="100%" height="100%" title="" [src]="urlSafe" type="text/html" scrolling="no"
+    marginwidth="0" marginheight="0" allowFullScreen></iframe>
+</ion-content>

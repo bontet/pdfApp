@@ -8,12 +8,17 @@ import { FolderPageRoutingModule } from './folder-routing.module';
 
 import { FolderPage } from './folder.page';
 
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    FolderPageRoutingModule,
+    PdfViewerModule,
+    LazyLoadImageModule
   ],
   declarations: [FolderPage]
 })

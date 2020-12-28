@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>Admin</ion-title>
+    <ion-buttons slot="secondary">
+      <ion-button [routerLink]="['/']">
+        <ion-icon slot="start" name="apps"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logOut()">
+        <ion-icon slot="start" name="exit"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-row *ngIf="isSearch">
+    <ion-col size="12">
+      <ion-list-header color="light">
+        <div class="is-search">
+          <ion-searchbar class="ion-no-border" slot="end" showCancelButton="focus" cancelButtonText="Custom Cancel"
+            [(ngModel)]="searchValue"></ion-searchbar>
+        </div>
+      </ion-list-header>
+    </ion-col>
+  </ion-row>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <!-- Menu -->
+      <ion-col size-sm="3" size-md="3" size-lg="3" size-xs="12">
+        <ion-card>
+          <ion-row>
+            <ion-col size="6">
+              <ion-button (click)="create()" expand="block" shape="round" color="success">
+                <ion-icon slot="start" name="add"></ion-icon>
+                Add
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button (click)="isSearch = !isSearch" expand="block" shape="round">
+                <ion-icon slot="start" name="search" *ngIf="isSearch == !isSearch"></ion-icon>
+                <ion-icon slot="start" name="close" *ngIf="isSearch"></ion-icon>
+                Search
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <!-- Content Table -->
+      <ion-col size="12">
+        <ion-row>
+          <ion-col size="12">
+            <ngx-datatable class="material striped" style="height: 600px;" [sortType]="'multi'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="50" [rows]="rows | filter:searchValue" [selected]="selected"
+              [selectionType]="SelectionType.single" (activate)="onActivate($event)" (select)="onSelect($event)"
+              [columnMode]="'force'" [limit]="10" [scrollbarV]="true" [scrollbarH]="true">
+
+              <ngx-datatable-column name="Name" prop="name" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Week" prop="weeks"></ngx-datatable-column>
+              <ngx-datatable-column name="Season" prop="seasons" [width]="100"></ngx-datatable-column>
+              <!-- <ngx-datatable-column name="Note" prop="note" [width]="300"></ngx-datatable-column> -->
+            </ngx-datatable>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

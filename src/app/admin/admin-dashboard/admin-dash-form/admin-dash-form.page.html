@@ -1,0 +1,103 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title>{{method}} File</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="closeForm()">
+        <ion-icon slot="start" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary">
+      <ion-button (click)="onSubmit()" [disabled]="!adminForm.valid">
+        <ion-icon slot="icon-only" name="save-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="secondary" *ngIf="method ==='Update'">
+      <ion-button (click)="deleteData()" [disabled]="!adminForm.valid">
+        <ion-icon slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <form [formGroup]="adminForm">
+          <ion-row>
+            <ion-col size="6" class="ion-padding">
+              <!-- Name -->
+              <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input formControlName="name" placeholder="Enter filename..."></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.filename">
+                <ng-container
+                  *ngIf="adminForm.get('name').hasError(error.type) && (adminForm.get('name').dirty || adminForm.get('name').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <!-- Season -->
+              <ion-item>
+                <ion-label position="floating">Season</ion-label>
+                <ionic-selectable [items]="season" itemValueField="name" itemTextField="name" [canSearch]="true" formControlName="season">
+              </ionic-selectable>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.season">
+                <ng-container
+                  *ngIf="adminForm.get('season').hasError(error.type) && (adminForm.get('season').dirty || adminForm.get('season').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <!-- Season -->
+              <ion-item>
+                <!-- <ion-label position="floating">Week</ion-label> -->
+                <ion-input type="date" formControlName="weeks"></ion-input>
+              </ion-item>
+              <div *ngFor="let error of errorMessages.weeks">
+                <ng-container
+                  *ngIf="adminForm.get('weeks').hasError(error.type) && (adminForm.get('weeks').dirty || adminForm.get('weeks').touched)">
+                  <small class="error-message">{{error.message}}</small>
+                </ng-container>
+              </div>
+
+              <!-- Price Range-->
+              <ion-item>
+                <ion-label>Price range</ion-label>
+                <ionic-selectable [items]="rangePrice" itemValueField="name" itemTextField="name" [canSearch]="true" formControlName="priceRange">
+                </ionic-selectable>
+              </ion-item>
+
+              <!-- Thumbnail -->
+              <ion-item>
+                <ion-label>Cover</ion-label>
+                <ion-card slot="end" (click)="fileInputCover.click()" style="cursor: pointer;">
+                  <img src="/assets/images/default-image-rev.jpg" *ngIf="!coverFilePreview" alt="" style="width: 50px;">
+                  <img [src]="coverPreview" *ngIf="coverFilePreview" alt="" style="width: 50px;display: block;">
+                  <input #fileInputCover type="file" accept='image/jpeg' (change)="uploadCover($event.target.files)"
+                  style="display: none;" />
+                </ion-card>
+              </ion-item>
+
+            </ion-col>
+            <ion-col size="6">
+              <ion-card class="img-picker" (click)="fileInput.click()" style="cursor: pointer;">
+                <ion-img src="/assets/images/pdf-upload.png" *ngIf="!previewImage"></ion-img>
+                <input #fileInput type="file" accept='application/pdf' (change)="fileUploads($event.target.files)"
+                  style="display: none;" />
+                <pdf-viewer [page]="1" [fit-to-page]="true" [src]="previewPDF" [render-text]="true"
+                  style="display: block; height: 350px;" *ngIf="previewImage"></pdf-viewer>
+                <p class="image-upload-warning" *ngIf="!previewImage" style="text-align: center;">Max file size 2Mb</p>
+              </ion-card>
+
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
